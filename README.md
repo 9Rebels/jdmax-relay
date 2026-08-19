@@ -13,7 +13,6 @@ JDMAX Relay 是一个 Linux 请求转发服务。目标域名存在 AAAA 记录�
   地址所在的可路由 `/64`，避免随机进入未路由的相邻子网。
 - 每个请求临时绑定随机 IPv6 `/128`，请求结束后自动删除。
 - 自动安装或复用 Docker，升级前自动备份旧文件和旧镜像。
-- 使用 `safari_ios_18_0` TLS profile，支持 HTTP/2。
 - `/health` 提供 IPv6 前缀、地址池和绑定失败次数等状态。
 
 ## 支持架构
@@ -154,27 +153,11 @@ http://SERVER_IP:24678/health
 
 建议仅向可信局域网或指定客户端开放 `24678` 端口。
 
-## JDMAX 接入方法
-
-在 JDMAX 公共配置中填写 Relay 地址：
-
-```javascript
-RS_RELAY_URL: 'http://SERVER_IP:24678',
-```
-
 青龙、白虎或其他 Linux 环境也可以设置：
 
 ```bash
 export RS_RELAY_URL="http://SERVER_IP:24678"
 ```
-
-配置后重启对应脚本或运行环境。请求成功时可看到类似日志：
-
-```text
-🌐 JDMAX Relay 出口 IP: IPV6_ADDRESS → api.m.jd.com (ipv6)
-```
-
-不配置或清空 `RS_RELAY_URL` 时，JDMAX 保持原请求方式。
 
 ## 直接调用接口
 
